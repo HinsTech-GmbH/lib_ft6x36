@@ -2,6 +2,8 @@
 
 STM32Cube PlatformIO HAL library for the FT62366/FT6336/FT6436L/FT6436 capacitive touchscreen controller
 
+Chip datasheet: https://www.buydisplay.com/download/ic/FT6236-FT6336-FT6436L-FT6436_Datasheet.pdf
+
 ## Usage
 
 Simply connect the chip's SDA to STM32 SDA and SCL to STM32 SCL.
