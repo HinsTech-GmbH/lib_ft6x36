@@ -56,7 +56,6 @@
 #define FT_WORKING_MODE     0b00000000
 #define FT_FACTORY_MODE     0b01000000
 
-#define FT_GET_EVENT_FLAG(xh_reg)   (xh_reg & 0x80)
+#define FT_GET_EVENT_FLAG(xh_reg)   (xh_reg >> 6)
 #define FT_GET_TOUCH_ID(yh_reg)     (yh_reg >> 4)
 #define FT_GET_TOUCH_AREA(misc_reg) (misc_reg >> 4)
-

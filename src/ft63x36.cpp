@@ -54,8 +54,54 @@ void FT6x36::getPoint(uint8_t _n, touch_point_t *_point)
     
     _point->x = (xh & 0x0F) << 8 | xl;
     _point->y = (yh & 0x0F) << 8 | yl;
-    _point->event_flag = FT_GET_EVENT_FLAG(xh);
+    _point->event = FT_GET_EVENT_FLAG(xh);
     _point->touch_id = FT_GET_TOUCH_ID(yh);
     _point->weight = readRegister(FT_REG_P1_WEIGHT + (FT_POINT_REGS_OFFSET * _n));
     _point->area = FT_GET_TOUCH_AREA(readRegister(FT_REG_P1_MISC + (FT_POINT_REGS_OFFSET * _n)));
+}
+
+uint8_t FT6x36::getGesture()
+{
+    return readRegister(FT_REG_GEST_ID);
+}
+
+uint8_t FT6x36::getThreshold()
+{
+    return readRegister(FT_REG_TH_GROUP);
+}
+
+void FT6x36::setThreshold(uint8_t _threshold)
+{
+    writeRegister(FT_REG_TH_GROUP, _threshold);
+}
+
+void FT6x36::setModeSwitching(bool _onoff)
+{
+    // false = 0x00 = off, true = 0x01 = on
+    writeRegister(FT_REG_CTRL, (uint8_t)_onoff);
+}
+
+void FT6x36::setModeSwitchDelay(uint8_t _delay)
+{
+    writeRegister(FT_REG_TIME_ENTER_MONITOR, _delay);
+}
+
+uint8_t FT6x36::getPeriodActive()
+{
+    return readRegister(FT_REG_PERIOD_ACTIVE);
+}
+
+uint8_t FT6x36::getPeriodMonitor()
+{
+    return readRegister(FT_REG_PERIOD_MONITOR);
+}
+
+void FT6x36::setPeriodActive(uint8_t _rate)
+{
+    writeRegister(FT_REG_PERIOD_ACTIVE, _rate);
+}
+
+void FT6x36::setPeriodMonitor(uint8_t _rate)
+{
+    writeRegister(FT_REG_PERIOD_MONITOR, _rate);
 }
